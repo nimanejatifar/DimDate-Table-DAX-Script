@@ -1,0 +1,30 @@
+Date =
+
+VAR __StartYear =
+VAR __EndYear =
+
+RETURN
+
+    ADDCOLUMNS (
+        CALENDAR ( DATE ( __StartYear, 1, 1 ), DATE ( __EndYear, 12, 31 ) ),
+        "DateID", FORMAT ( [DATE], "YYYYMMDD" ),
+        "Year", YEAR ( [DATE] ),
+        "DayOfYear", DATEDIFF ( DATE ( YEAR ( [DATE] ), 1, 1 ), [DATE], DAY ) + 1,
+        "Month", MONTH ( [DATE] ),
+        "MonthNo", FORMAT ( [DATE], "MM" ),
+        "YearMonthNo", FORMAT ( [DATE], "YYYY/MM" ),
+        "YearMonth", FORMAT ( [DATE], "YYYY/mmm" ),
+        "MonthShort", FORMAT ( [DATE], "mmm" ),
+        "MonthLong", FORMAT ( [DATE], "mmmm" ),
+        "DayOfMonth", DAY ( [DATE] ),
+        "WeekNo", WEEKDAY ( [DATE] ),
+        "WeekDay", FORMAT ( [DATE], "dddd" ),
+        "WeekDayShort", FORMAT ( [DATE], "ddd" ),
+        "DayOfWeek",
+            IF ( WEEKDAY ( [DATE] ) = 1, 7, WEEKDAY ( [DATE] ) - 1 ),
+        "WeekOfYear", WEEKNUM ( [DATE] ),
+        "Quarter", "Q" & FORMAT ( [DATE], "Q" ),
+        "YearQuarter",
+            FORMAT ( [DATE], "YYYY" ) & "/Q"
+                & FORMAT ( [DATE], "Q" )
+    )
